@@ -9,7 +9,7 @@ class Roster(db.Model):
 
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id'), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.teams.id' if environment == "production" else 'teams.id'), nullable=False)
     player_name = db.Column(db.String(255), nullable =False)
     position = db.Column(db.String(255), nullable=False)
     nfl_team = db.Column(db.String(255)) #Optional for the MVP, for now at least. Might take a gander later
