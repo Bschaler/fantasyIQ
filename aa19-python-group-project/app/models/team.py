@@ -9,7 +9,7 @@ class Team(db.Model):
 
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id'), nullable=False)
     name = db.Column(db.String(255), nullable=False)
     platform = db.Column(db.String(255), nullable=False)
     league_name = db.Column(db.String(255), nullable=False)

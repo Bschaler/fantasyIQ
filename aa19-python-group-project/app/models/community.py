@@ -9,7 +9,7 @@ class BlogPost(db.Model):
 
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id'), nullable=False)
     title = db.Column(db.String(255), nullable=False)  
     content = db.Column(db.Text, nullable=False)  #the actual blog post, no limit on haracter count, may refine
     category = db.Column(db.String(255), nullable=False) # somethin like "Sleepers", "Trade Advice" etc, again, may refine or remove if i dont feel it's necessary
