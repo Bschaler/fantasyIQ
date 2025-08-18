@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadNotes } from "../../redux/watchlist";
+import { loadNotes, removeNote } from "../../redux/watchlist";
 
 function WatchlistIndex() {
   const dispatch = useDispatch();
@@ -11,8 +11,14 @@ function WatchlistIndex() {
     dispatch(loadNotes());
   }, [dispatch]);
 
+  const handleDelete = (noteId) => {
+    if (window.confirm("Delete this note?")) {
+      dispatch(removeNote(noteId));
+    }
+  };
+
   if (!user) {
-    return <div>Must be logged in to see your player notes</div>;
+    return <div>Please log in to see your player notes</div>;
   }
 
   return (
@@ -20,7 +26,7 @@ function WatchlistIndex() {
       <h1>My Player Watchlist</h1>
       
       {notes.length === 0 ? (
-        <p>No player notes yet! Add a player and note.</p>
+        <p>No player notes yet! Add your first player.</p>
       ) : (
         <div>
           {notes.map((note) => (
@@ -31,6 +37,8 @@ function WatchlistIndex() {
               <p><strong>Interest Level:</strong> {note.interest_level}</p>
               <p><strong>Notes:</strong> {note.notes}</p>
               <p><strong>On Watchlist:</strong> {note.is_watchlist ? "Yes" : "No"}</p>
+              
+              <button onClick={() => handleDelete(note.id)}>Delete</button>
             </div>
           ))}
         </div>

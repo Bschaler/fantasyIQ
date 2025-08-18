@@ -49,29 +49,79 @@ export const createNote = (noteData) => async (dispatch) => {
   }
 };
 
+export const editNote = (noteId, noteData) => async (dispatch) => {
+  const response = await fetch(`/api/notes/${noteId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(noteData)
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(updateNote(data));
+    return data;
+  }
+};
+
+export const removeNote = (noteId) => async (dispatch) => {
+  const response = await fetch(`/api/notes/${noteId}`, {
+    method: 'DELETE'
+  });
+
+  if (response.ok) {
+    dispatch(deleteNote(noteId));
+    return noteId;
+  }
+};
 // Reducin'
 const initialState = {
   playerNotes: []
 };
 
 function watchlistReducer(state = initialState, action) {
-  switch (action.type) {
-    case GET_NOTES:
-      return { ...state, playerNotes: action.notes };
+  switch (action.type) {      
+    case GET_NOTES:    
+      console.log('setting notes:', action.notes);
+      return { 
+        ...state, 
+        playerNotes: action.notes,
+        loading: false 
+      };
+    
     case ADD_NOTE:
-      return { ...state, playerNotes: [...state.playerNotes, action.note] };
+      console.log('adding note:', action.note);
+      const newNotes = [...state.playerNotes, action.note];
+      return { 
+        ...state, 
+        playerNotes: newNotes 
+      };
+
+    
     case UPDATE_NOTE:
+        console.log('updating note:', action.note);
+      const updatedNotes = state.playerNotes.map(note => {
+        if (note.id === action.note.id) {
+          return action.note;
+        } else {
+          return note;
+        }
+      });
       return { 
         ...state, 
-        playerNotes: state.playerNotes.map(note => 
-          note.id === action.note.id ? action.note : note
-        )
+        playerNotes: updatedNotes 
       };
+
+    
     case DELETE_NOTE:
+      console.log('deleting note:', action.noteId);
+      const filteredNotes = state.playerNotes.filter(note => {
+        return note.id !== action.noteId;
+      });
       return { 
         ...state, 
-        playerNotes: state.playerNotes.filter(note => note.id !== action.noteId)
+        playerNotes: filteredNotes 
       };
+      
     default:
       return state;
   }
