@@ -7,6 +7,13 @@ import {
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 
+// redux imports
+import teamsReducer from "./teams";
+import watchlistReducer from "./watchlist";
+import tradesReducer from "./trades";
+import communityReducer from "./community";
+import rosterReducer from "./roster";
+
 const rootReducer = combineReducers({
   session: sessionReducer,
 });
