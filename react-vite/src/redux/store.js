@@ -16,6 +16,11 @@ import rosterReducer from "./roster";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  teams: teamsReducer,        
+  watchlist: watchlistReducer,   
+  trades: tradesReducer,       
+  community: communityReducer,  
+  roster: rosterReducer,
 });
 
 let enhancer;
