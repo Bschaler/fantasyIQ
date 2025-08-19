@@ -31,6 +31,8 @@ export const loadPlayers = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(getPlayers(data.players));
+  }else {
+    console.log("loading players fail:", response.status);
   }
 };
 
@@ -44,6 +46,35 @@ export const createPlayer = (playerData) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addPlayer(data));
+  }else {
+    console.log("Created player fail:", response.status); 
+  }
+};
+
+export const editPlayer = (playerId, playerData) => async (dispatch) => {
+  const response = await fetch(`/api/roster/${playerId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(playerData)
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(updatePlayer(data));
+  }else {
+    console.log("update player fail:", response.status); 
+  }
+};
+
+export const removePlayer = (playerId) => async (dispatch) => {
+  const response = await fetch(`/api/roster/${playerId}`, {
+    method: 'DELETE'
+  });
+
+  if (response.ok) {
+    dispatch(deletePlayer(playerId));
+  }  else {
+    console.log("delete player fial:", response.status); 
   }
 };
 

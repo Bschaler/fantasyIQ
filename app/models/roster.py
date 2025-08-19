@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA
+from .team import Team
 
 class Roster(db.Model):
     __tablename__ = 'team_players'
@@ -13,13 +14,16 @@ class Roster(db.Model):
     player_name = db.Column(db.String(255), nullable =False)
     position = db.Column(db.String(255), nullable=False)
     nfl_team = db.Column(db.String(255)) #Optional for the MVP, for now at least. Might take a gander later
-
+ 
+    team = db.relationship('Team', backref='players')
 
     def to_dict(self):
         return{
             'id': self.id,
             'team_id': self.team_id,
-            'player_name': self.player_name,
+            'team_name': self.team.name,
+            'name': self.player_name,
             'position': self.position,
             'nfl_team': self.nfl_team,
+            'roster_position': 'Starter' 
         }

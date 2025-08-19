@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadTeams } from "../../redux/teams";
+import { loadTeams, updateTeam } from "../../redux/teams";
 import "./Teams.css";
 
 function EditTeamForm() {

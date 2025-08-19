@@ -3,12 +3,17 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import TeamsIndex from '../components/Teams/TeamIndex';
 import CreateTeamForm from '../components/Teams/CreateTeamForm';
+import TeamRoster from '../components/Teams/TeamRoster';
 import WatchlistIndex from '../components/Watchlist/WatchlistIndex';
 import CreateNoteForm from '../components/Watchlist/CreateNoteForm';
 import TradesIndex from '../components/Trades/TradesIndex';
 import CreateTradeForm from '../components/Trades/CreateTradeForm';
 import EditTradeForm from '../components/Trades/EditTradeForm'; 
 import DeleteTrade from '../components/Trades/DeleteTrade';
+import RosterIndex from '../components/Roster/RosterIndex';    
+import CreatePlayerForm from '../components/Roster/CreatePlayerForm'; 
+import EditPlayerForm from '../components/Roster/EditPlayerForm';    
+import DeletePlayer from '../components/Roster/DeletePlayer';   
 import Layout from './Layout';
 
 function Home() {
@@ -34,6 +39,11 @@ function Home() {
           <h3>Trade Scenarios</h3>
           <a href="/trades">View My Trades</a> | 
           <a href="/trades/new"> Create Trade Idea</a>
+        </div>
+        <div>                
+          <h3>Team Roster</h3>
+          <a href="/roster">Manage Roster</a> | 
+          <a href="/roster/new"> Add Player</a>
         </div>
       </div>
     </div>
@@ -65,6 +75,10 @@ export const router = createBrowserRouter([
         element: <CreateTeamForm />,
       },
       {
+    path: "teams/:teamId/roster",
+    element: <TeamRoster />,
+},
+      {
         path: "watchlist",
         element: <WatchlistIndex />,
       },
@@ -88,6 +102,23 @@ export const router = createBrowserRouter([
   path: "trades/:tradeId/delete",
   element: <DeleteTrade />,
 },
+
+{
+        path: "roster",
+        element: <RosterIndex />,
+      },
+      {
+        path: "roster/new",
+        element: <CreatePlayerForm />,
+      },
+      {
+        path: "roster/:playerId/edit",
+        element: <EditPlayerForm />,
+      },
+      {
+        path: "roster/:playerId/delete",
+        element: <DeletePlayer />,
+      },
     ],
   },
 ]);

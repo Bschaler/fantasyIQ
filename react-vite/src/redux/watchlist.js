@@ -80,24 +80,25 @@ const initialState = {
 
 function watchlistReducer(state = initialState, action) {
   switch (action.type) {      
-    case GET_NOTES:    
+    case GET_NOTES: {   
       console.log('setting notes:', action.notes);
       return { 
         ...state, 
         playerNotes: action.notes,
         loading: false 
       };
-    
-    case ADD_NOTE:
+    }
+    case ADD_NOTE:{
       console.log('adding note:', action.note);
       const newNotes = [...state.playerNotes, action.note];
       return { 
         ...state, 
         playerNotes: newNotes 
       };
+    }
 
     
-    case UPDATE_NOTE:
+    case UPDATE_NOTE:{
         console.log('updating note:', action.note);
       const updatedNotes = state.playerNotes.map(note => {
         if (note.id === action.note.id) {
@@ -110,9 +111,9 @@ function watchlistReducer(state = initialState, action) {
         ...state, 
         playerNotes: updatedNotes 
       };
-
+    }
     
-    case DELETE_NOTE:
+    case DELETE_NOTE:{
       console.log('deleting note:', action.noteId);
       const filteredNotes = state.playerNotes.filter(note => {
         return note.id !== action.noteId;
@@ -121,6 +122,7 @@ function watchlistReducer(state = initialState, action) {
         ...state, 
         playerNotes: filteredNotes 
       };
+    }
       
     default:
       return state;

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadTeams } from "../../redux/teams";
+import { loadTeams, removeTeam } from "../../redux/teams";
 import "./Teams.css";
 
 function TeamsIndex() {
@@ -11,6 +11,13 @@ function TeamsIndex() {
   useEffect(() => {
     dispatch(loadTeams());
   }, [dispatch]);
+
+    const handleDelete = (teamId) => {
+    if (window.confirm("Delete this team?")) {
+      dispatch(removeTeam(teamId));
+    }
+  };
+
 
   if (!user) {
     return <div>You must be logged in to see your teams</div>;
@@ -31,6 +38,10 @@ function TeamsIndex() {
               <p>League: {team.league_name}</p>
               <p>Size: {team.league_size} teams</p>
               <p>Scoring: {team.scoring_format}</p>
+
+            <button onClick={() => window.location.href = `/teams/${team.id}/roster`}>View Roster</button>  {/* ← ADD THIS */}
+            <button>Edit</button>
+            <button onClick={() => handleDelete(team.id)}>Delete</button>
             </div>
           ))}
         </div>

@@ -18,7 +18,7 @@ def create_roster_player():
     
     new_player = Roster(
         team_id=data['team_id'],
-        player_name=data['player_name'],
+        player_name=data['name'],
         position=data['position'],
         nfl_team=data['nfl_team']
     )
@@ -35,7 +35,7 @@ def update_roster_player(player_id):
     data = request.get_json()
     
     player.team_id = data['team_id']
-    player.player_name = data['player_name']
+    player.player_name = data['name']
     player.position = data['position']
     player.nfl_team = data['nfl_team']
     
