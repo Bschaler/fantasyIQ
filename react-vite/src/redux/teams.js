@@ -26,8 +26,9 @@ const deleteTeam = (teamId) => ({
 
 // Thunkin'
 export const loadTeams = () => async (dispatch) => {
-  const response = await fetch('/api/teams');
-  
+  const response = await fetch('/api/teams',{
+     credentials: 'include'
+  });
   if (response.ok) {
     const data = await response.json();
     dispatch(getTeams(data.teams));
@@ -38,6 +39,8 @@ export const createTeam = (teamData) => async (dispatch) => {
   const response = await fetch('/api/teams', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    
     body: JSON.stringify(teamData)
   });
 
@@ -51,12 +54,24 @@ export const updateTeam = (teamId, teamData) => async (dispatch) => {
   const response = await fetch(`/api/teams/${teamId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
     body: JSON.stringify(teamData)
   });
 
   if (response.ok) {
     const data = await response.json();
     dispatch(editTeam(data));
+  }
+};
+
+export const removeTeam = (teamId) => async (dispatch) => {
+  const response = await fetch(`/api/teams/${teamId}`, {
+    method: 'DELETE',
+    credentials: 'include'
+  });
+
+  if (response.ok) {
+    dispatch(deleteTeam(teamId));
   }
 };
 

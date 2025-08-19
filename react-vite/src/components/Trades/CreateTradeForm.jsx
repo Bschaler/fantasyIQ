@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom"; 
 import { createTrade } from "../../redux/trades";
 
 function CreateTradeForm() {
   const dispatch = useDispatch();
+    const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [myPlayers, setMyPlayers] = useState("");
   const [targetPlayers, setTargetPlayers] = useState("");
@@ -23,7 +25,8 @@ function CreateTradeForm() {
       confidence
     };
 
-    await dispatch(createTrade(tradeData));
+    dispatch(createTrade(tradeData));
+        navigate('/trades');
     
     // Reset form
     setTitle("");

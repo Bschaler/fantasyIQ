@@ -27,6 +27,8 @@ function TeamDetails() {
       <p>Size: {team.league_size} teams</p>
       <p>Scoring: {team.scoring_format}</p>
       
+
+    {/* the roster will go here when players are added. Seeders are being weird though so no info is showing */}
       <h3>Team Roster</h3>
       <p>Players will go here...</p>
     </div>

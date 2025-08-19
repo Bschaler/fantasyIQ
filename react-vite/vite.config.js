@@ -14,7 +14,16 @@ export default defineConfig((mode) => ({
   server: {
     open: true,
     proxy: {
-      "/api": "http://127.0.0.1:8000",
+      "/api": {
+        target: "http://127.0.0.1:8000",
+        changeOrigin: true,
+        secure: false,
+        cookieDomainRewrite: "localhost:5177",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        }
+      },
     },
   },
 }));

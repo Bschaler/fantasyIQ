@@ -6,7 +6,9 @@ import CreateTeamForm from '../components/Teams/CreateTeamForm';
 import WatchlistIndex from '../components/Watchlist/WatchlistIndex';
 import CreateNoteForm from '../components/Watchlist/CreateNoteForm';
 import TradesIndex from '../components/Trades/TradesIndex';
-//import CreateTradeForm from '../components/Trades/CreateTradeForm';
+import CreateTradeForm from '../components/Trades/CreateTradeForm';
+import EditTradeForm from '../components/Trades/EditTradeForm'; 
+import DeleteTrade from '../components/Trades/DeleteTrade';
 import Layout from './Layout';
 
 function Home() {
@@ -74,10 +76,18 @@ export const router = createBrowserRouter([
         path: "trades",
         element: <TradesIndex />,
       },
-     /* {
+     {
         path: "trades/new",
         element: <CreateTradeForm />,
-      },*/
+      },
+      {
+  path: "trades/:tradeId/edit", 
+  element: <EditTradeForm />,
+},
+{
+  path: "trades/:tradeId/delete",
+  element: <DeleteTrade />,
+},
     ],
   },
 ]);

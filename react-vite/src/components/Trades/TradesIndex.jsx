@@ -41,7 +41,7 @@ const handleDelete = (tradeId) => {
               <p><strong>Analysis:</strong> {trade.analysis_notes}</p>
               <p><strong>Confidence:</strong> {trade.confidence}</p>
               
-              <button>Edit</button>
+              <button onClick={() => window.location.href = `/trades/${trade.id}/edit`}>Edit</button>
               <button onClick={() => handleDelete(trade.id)}>Delete</button>
             </div>
           ))}

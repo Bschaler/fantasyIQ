@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadTrades, editTrade } from "../../redux/trades";
 
 function EditTradeForm() {
   const { tradeId } = useParams();
   const dispatch = useDispatch();
+    const navigate = useNavigate();
   const trades = useSelector((state) => state.trades.scenarios);
   const trade = trades.find(trade => trade.id === parseInt(tradeId));
 
@@ -44,6 +45,7 @@ function EditTradeForm() {
     };
 
     await dispatch(editTrade(tradeId, tradeData));
+        navigate('/trades');
   };
 
   if (!trade) {
