@@ -34,14 +34,28 @@ function EditPlayerForm() {
     e.preventDefault();
 
     const playerData = {
+      team_id: player.team_id,
       name,
       position,
       nfl_team: nflTeam,
       roster_position: rosterPosition
     };
 
-    dispatch(editPlayer(playerId, playerData));
-    navigate('/roster');
+    await dispatch(editPlayer(playerId, playerData));
+    if (player && player.team_id) {
+      navigate(`/teams/${player.team_id}/roster`);
+    } else {
+      navigate('/teams'); 
+    }
+  };
+
+    const handleCancel = () => {
+
+    if (player && player.team_id) {
+      navigate(`/teams/${player.team_id}/roster`);
+    } else {
+      navigate('/teams');
+    }
   };
 
   if (!player) {
@@ -49,50 +63,64 @@ function EditPlayerForm() {
   }
 
   return (
-    <div>
-      <h1>Edit Player</h1>
+    <div className="edit-player-container">
+      <h1 className="edit-player-title">Edit Player</h1>
       
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Player Name</label>
+      <form className="edit-player-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="form-label">Player Name</label>
           <input
+            className="form-input"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
 
-        <div>
-          <label>Position</label>
+        <div className="form-group">
+          <label className="form-label">Position</label>
           <input
+            className="form-input"
             type="text"
             value={position}
             onChange={(e) => setPosition(e.target.value)}
+            required
           />
         </div>
 
-        <div>
-          <label>NFL Team</label>
+        <div className="form-group">
+          <label className="form-label">NFL Team</label>
           <input
+            className="form-input"
             type="text"
             value={nflTeam}
             onChange={(e) => setNflTeam(e.target.value)}
           />
         </div>
 
-        <div>
-          <label>Roster Position</label>
+        <div className="form-group">
+          <label className="form-label">Roster Position</label>
           <input
+            className="form-input"
             type="text"
             value={rosterPosition}
             onChange={(e) => setRosterPosition(e.target.value)}
           />
         </div>
 
-        <button type="submit">Update Player</button>
+        <div className="form-actions">
+          <button className="btn btn-primary" type="submit">
+            Update Player
+          </button>
+          <button className="btn btn-secondary" type="button" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
 }
+
 
 export default EditPlayerForm;

@@ -1,19 +1,57 @@
 import { NavLink } from "react-router-dom";
-import ProfileButton from "./ProfileButton";
+import { useDispatch, useSelector } from "react-redux";
+import { thunkLogout } from "../../redux/session";
+import OpenModalMenuItem from "./OpenModalMenuItem";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 
 function Navigation() {
-  return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
 
-      <li>
-        <ProfileButton />
-      </li>
-    </ul>
+  const handleLogout = () => {
+    dispatch(thunkLogout());
+  };
+
+  return (
+    <header className="app-header">
+      <div className="nav-container">
+            <NavLink to="/" className="app-logo">
+          FantasyIQ
+        </NavLink>
+        
+        {user ? (
+          // Logged in - show full navigation
+          <>
+            <ul className="main-nav">
+              <li><NavLink to="/teams">My Teams</NavLink></li>
+              <li><NavLink to="/watchlist">Watchlist</NavLink></li>
+              <li><NavLink to="/trades">Trades</NavLink></li>
+              <li><NavLink to="/community">Community</NavLink></li>
+            </ul>
+            
+            <button className="logout-btn" onClick={handleLogout}>
+              Log Out
+            </button>
+          </>
+        ) : (
+          // Not logged in - show login/signup buttons
+          <div className="auth-buttons">
+            <OpenModalMenuItem
+              itemText="Log In"
+              modalComponent={<LoginFormModal />}
+            />
+            <OpenModalMenuItem
+              itemText="Sign Up"
+              modalComponent={<SignupFormModal />}
+            />
+          </div>
+        )}
+      </div>
+    </header>
   );
 }
 
 export default Navigation;
+

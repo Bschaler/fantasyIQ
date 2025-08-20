@@ -1,9 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { useSelector, useDispatch  } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { loadTeams } from "../redux/teams";
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import TeamsIndex from '../components/Teams/TeamIndex';
 import CreateTeamForm from '../components/Teams/CreateTeamForm';
 import TeamRoster from '../components/Teams/TeamRoster';
+import EditTeamForm from '../components/Teams/EditTeamForm'; 
 import WatchlistIndex from '../components/Watchlist/WatchlistIndex';
 import CreateNoteForm from '../components/Watchlist/CreateNoteForm';
 import TradesIndex from '../components/Trades/TradesIndex';
@@ -20,42 +25,86 @@ import EditPostForm from '../components/Community/EditPostForm';
 import DeletePost from '../components/Community/DeletePost';  
 import Layout from './Layout';
 
+
+
 function Home() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector(state => state.session.user);
+  const teams = useSelector(state => state.teams.userTeams);
+
+  // Load teams when component mounts
+  useEffect(() => {
+    if (user) {
+      dispatch(loadTeams());
+    }
+  }, [dispatch, user]);
+
+  if (!user) {
+    return <div>Please log in</div>;
+  }
+
+  // Function to handle View button clicks
+  const handleViewTeam = (teamId) => {
+    navigate(`/teams/${teamId}/roster`);
+  };
+
   return (
-    <div>
-      <h1>Welcome to FantasyIQ!</h1>
-      <div>
-        <h2>Your Fantasy Football Tools:</h2>
-        
-        <div>
-          <h3>Teams</h3>
-          <a href="/teams">View My Teams</a> | 
-          <a href="/teams/new"> Create New Team</a>
+    <div className="dashboard">
+      <h1 className="welcome-title">Welcome back, {user.username}</h1>
+
+      <section className="my-teams-section">
+        <h2 className="section-title">My Teams:</h2>
+        <div className="team-cards-container">
+          {teams && teams.length > 0 ? (
+            teams.map(team => (
+              <div key={team.id} className="team-card">
+                <div className="team-name">{team.name}</div>
+                <div className="team-record">
+                  {team.platform} - {team.scoring_format}
+                </div>
+                <button 
+                  className="view-btn" 
+                  onClick={() => handleViewTeam(team.id)}
+                >
+                  View
+                </button>
+              </div>
+            ))
+          ) : (
+            // Show placeholder if no teams
+            <div className="team-card">
+              <div className="team-name">No teams yet</div>
+              <div className="team-record">Create your first team!</div>
+              <button 
+                className="view-btn" 
+                onClick={() => navigate('/teams/new')}
+              >
+                Create Team
+              </button>
+            </div>
+          )}
         </div>
-        
-        <div>
-          <h3>Player Watchlist</h3>
-          <a href="/watchlist">View My Notes</a> | 
-          <a href="/watchlist/new"> Add Player Note</a>
-        </div>
-        
-        <div>
-          <h3>Trade Scenarios</h3>
-          <a href="/trades">View My Trades</a> | 
-          <a href="/trades/new"> Create Trade Idea</a>
-        </div>
-        
-        <div>                
-          <h3>Team Roster</h3>
-          <a href="/roster">Manage Roster</a> | 
-          <a href="/roster/new"> Add Player</a>
-        </div>
-        
-          <div>
-          <h3>Community</h3>
-            <a href="/community">View Posts</a> | 
-            <a href="/community/new"> Create Post</a>
-        </div>
+      </section>
+
+      <div className="activity-blog-container">
+        <section className="activity-section">
+          <h3>Your recent activity:</h3>
+          <ul className="activity-list">
+            <li>Knsfkfsih</li>
+            <li>Jdjfsfkbf</li>
+            <li>Nsfksnfk</li>
+          </ul>
+        </section>
+
+        <section className="blog-section">
+          <h3>Blog:</h3>
+          <ul className="blog-list">
+            <li>Jdkfjk</li>
+            <li>Fvnsjgbejj</li>
+            <li>kfmnknkrem</li>
+          </ul>
+        </section>
       </div>
     </div>
   );
@@ -86,9 +135,18 @@ export const router = createBrowserRouter([
         element: <CreateTeamForm />,
       },
       {
-    path: "teams/:teamId/roster",
-    element: <TeamRoster />,
-},
+    path: "teams/:teamId/roster/new",
+     element: <CreatePlayerForm />,
+      },
+      {
+        path: "teams/:teamId/roster",
+        element: <TeamRoster />,
+      },
+      {
+    path: "teams/:teamId/edit",
+    element: <EditTeamForm />,
+      },
+
       {
         path: "watchlist",
         element: <WatchlistIndex />,
@@ -101,20 +159,19 @@ export const router = createBrowserRouter([
         path: "trades",
         element: <TradesIndex />,
       },
-     {
+      {
         path: "trades/new",
         element: <CreateTradeForm />,
       },
       {
-  path: "trades/:tradeId/edit", 
-  element: <EditTradeForm />,
-},
-{
-  path: "trades/:tradeId/delete",
-  element: <DeleteTrade />,
-},
-
-{
+        path: "trades/:tradeId/edit", 
+        element: <EditTradeForm />,
+      },
+      {
+        path: "trades/:tradeId/delete",
+        element: <DeleteTrade />,
+      },
+      {
         path: "roster",
         element: <RosterIndex />,
       },
@@ -131,21 +188,21 @@ export const router = createBrowserRouter([
         element: <DeletePlayer />,
       },
       {
-      path: "community",
-      element: <CommunityIndex />,
+        path: "community",
+        element: <CommunityIndex />,
       },
-    {
-      path: "community/new",
-      element: <CreatePostForm />,
-    },
-    {
-      path: "community/:postId/edit",
-   element: <EditPostForm />,
-    },
-    {
-     path: "community/:postId/delete",
-    element: <DeletePost />,
-    },
+      {
+        path: "community/new",
+        element: <CreatePostForm />,
+      },
+      {
+        path: "community/:postId/edit",
+        element: <EditPostForm />,
+      },
+      {
+        path: "community/:postId/delete",
+        element: <DeletePost />,
+      },
     ],
   },
 ]);

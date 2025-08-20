@@ -14,7 +14,7 @@ class Roster(db.Model):
     player_name = db.Column(db.String(255), nullable =False)
     position = db.Column(db.String(255), nullable=False)
     nfl_team = db.Column(db.String(255)) #Optional for the MVP, for now at least. Might take a gander later
- 
+    roster_position = db.Column(db.String(255), default='Starter')
     team = db.relationship('Team', backref='players')
 
     def to_dict(self):
@@ -25,5 +25,5 @@ class Roster(db.Model):
             'name': self.player_name,
             'position': self.position,
             'nfl_team': self.nfl_team,
-            'roster_position': 'Starter' 
+            'roster_position': self.roster_position
         }

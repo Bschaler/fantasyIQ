@@ -38,6 +38,7 @@ def update_roster_player(player_id):
     player.player_name = data['name']
     player.position = data['position']
     player.nfl_team = data['nfl_team']
+    player.roster_position = data.get('roster_position', 'Starter')
     
     db.session.commit()
     return player.to_dict()

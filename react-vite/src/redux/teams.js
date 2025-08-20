@@ -65,13 +65,23 @@ export const updateTeam = (teamId, teamData) => async (dispatch) => {
 };
 
 export const removeTeam = (teamId) => async (dispatch) => {
+      console.log('trying to delete', teamId);
+
   const response = await fetch(`/api/teams/${teamId}`, {
     method: 'DELETE',
     credentials: 'include'
   });
 
+    console.log('Delete status:', response.status); 
+  console.log('Delete ok??:', response.ok);
+
   if (response.ok) {
+        console.log('Dispatching deleteTeam action');
     dispatch(deleteTeam(teamId));
+    } else {
+    console.log('Delete failed:', response.status);
+    const errorData = await response.text();
+    console.log('Error details:', errorData);
   }
 };
 

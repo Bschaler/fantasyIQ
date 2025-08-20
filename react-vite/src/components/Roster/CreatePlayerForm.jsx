@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams  } from "react-router-dom";
 import { createPlayer } from "../../redux/roster";
 
 function CreatePlayerForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { teamId } = useParams();
   const [name, setName] = useState("");
   const [position, setPosition] = useState("");
   const [nflTeam, setNflTeam] = useState("");
@@ -15,14 +16,20 @@ function CreatePlayerForm() {
     e.preventDefault();
 
     const playerData = {
+      team_id: teamId ? parseInt(teamId) : 1,
       name,
       position,
       nfl_team: nflTeam,
       roster_position: rosterPosition
     };
 
-    dispatch(createPlayer(playerData));
-    navigate('/roster');
+    await dispatch(createPlayer(playerData));
+
+      if (teamId) {
+      navigate(`/teams/${teamId}/roster`); // Go back to specific team roster
+    } else {
+      navigate('/roster'); // Go to general roster page
+    }
   };
 
   return (
