@@ -1,4 +1,6 @@
 from .db import db, environment, SCHEMA
+from .user import User
+
 
 class BlogPost(db.Model):
     __tablename__ = 'blog_posts'
@@ -22,4 +24,5 @@ class BlogPost(db.Model):
             'title': self.title,
             'content': self.content,
             'category': self.category,
+            'author_name': 'Demo User',
         }

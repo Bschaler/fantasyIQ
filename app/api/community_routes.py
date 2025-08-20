@@ -7,7 +7,7 @@ community_routes = Blueprint('community', __name__)
 @community_routes.route('/')
 @login_required
 def get_community_posts():
-    posts = BlogPost.query.filter(BlogPost.user_id == current_user.id).all()
+    posts = BlogPost.query.all()
     return {'posts': [post.to_dict() for post in posts]}
 
 # post: creating the blog post

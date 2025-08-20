@@ -26,7 +26,7 @@ const deletePost = (postId) => ({
 
 // Thunkin'
 export const loadPosts = () => async (dispatch) => {
-  const response = await fetch('/api/posts');
+  const response = await fetch('/api/community');
   
   if (response.ok) {
     const data = await response.json();
@@ -35,7 +35,7 @@ export const loadPosts = () => async (dispatch) => {
 };
 
 export const createPost = (postData) => async (dispatch) => {
-  const response = await fetch('/api/posts', {
+  const response = await fetch('/api/community', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(postData)
@@ -48,7 +48,7 @@ export const createPost = (postData) => async (dispatch) => {
 };
 
 export const editPost = (postId, postData) => async (dispatch) => {
-  const response = await fetch(`/api/posts/${postId}`, {
+  const response = await fetch(`/api/community/${postId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(postData)
@@ -61,7 +61,7 @@ export const editPost = (postId, postData) => async (dispatch) => {
 };
 
 export const removePost = (postId) => async (dispatch) => {
-  const response = await fetch(`/api/posts/${postId}`, {
+  const response = await fetch(`/api/community/${postId}`, {
     method: 'DELETE'
   });
 

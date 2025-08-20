@@ -13,7 +13,11 @@ import DeleteTrade from '../components/Trades/DeleteTrade';
 import RosterIndex from '../components/Roster/RosterIndex';    
 import CreatePlayerForm from '../components/Roster/CreatePlayerForm'; 
 import EditPlayerForm from '../components/Roster/EditPlayerForm';    
-import DeletePlayer from '../components/Roster/DeletePlayer';   
+import DeletePlayer from '../components/Roster/DeletePlayer'; 
+import CommunityIndex from '../components/Community/CommunityIndex';
+import CreatePostForm from '../components/Community/CreatePostForm';
+import EditPostForm from '../components/Community/EditPostForm';
+import DeletePost from '../components/Community/DeletePost';  
 import Layout from './Layout';
 
 function Home() {
@@ -40,10 +44,17 @@ function Home() {
           <a href="/trades">View My Trades</a> | 
           <a href="/trades/new"> Create Trade Idea</a>
         </div>
+        
         <div>                
           <h3>Team Roster</h3>
           <a href="/roster">Manage Roster</a> | 
           <a href="/roster/new"> Add Player</a>
+        </div>
+        
+          <div>
+          <h3>Community</h3>
+            <a href="/community">View Posts</a> | 
+            <a href="/community/new"> Create Post</a>
         </div>
       </div>
     </div>
@@ -119,6 +130,22 @@ export const router = createBrowserRouter([
         path: "roster/:playerId/delete",
         element: <DeletePlayer />,
       },
+      {
+      path: "community",
+      element: <CommunityIndex />,
+      },
+    {
+      path: "community/new",
+      element: <CreatePostForm />,
+    },
+    {
+      path: "community/:postId/edit",
+   element: <EditPostForm />,
+    },
+    {
+     path: "community/:postId/delete",
+    element: <DeletePost />,
+    },
     ],
   },
 ]);

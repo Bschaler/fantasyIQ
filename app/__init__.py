@@ -11,6 +11,8 @@ from .api.teams_routes import teams_routes
 from .api.notes_routes import notes_routes
 from .api.trades_routes import trades_routes
 from .api.roster_routes import roster_routes
+from .api.community_routes import community_routes
+
 from .seeds import seed_commands
 from .config import Config
 
@@ -36,6 +38,7 @@ app.register_blueprint(teams_routes, url_prefix='/api/teams')
 app.register_blueprint(notes_routes, url_prefix='/api/notes')
 app.register_blueprint(trades_routes, url_prefix='/api/trades')
 app.register_blueprint(roster_routes, url_prefix='/api/roster')
+app.register_blueprint(community_routes, url_prefix='/api/community')
 db.init_app(app)
 Migrate(app, db)
 
