@@ -75,7 +75,7 @@ button {
   margin: 20px 0;
 }
 
-/* Cards - simple rectangular boxes like wireframes */
+
 .player-card,
 .team-card {
   border: 2px solid #000;
@@ -113,7 +113,7 @@ button {
   margin: 20px 0;
 }
 
-/* Footer */
+
 .roster-footer {
   text-align: center;
   margin-top: 30px;
@@ -139,7 +139,7 @@ button {
 
 
 
-/* Edit Form Styles */
+/* Edit Form */
 .edit-form-container {
   max-width: 600px;
   margin: 0 auto;
