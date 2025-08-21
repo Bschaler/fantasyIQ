@@ -1,5 +1,3 @@
-
-
 /* Main containers */
 .roster-container,
 .teams-container {
@@ -11,18 +9,11 @@
 /* Headers */
 .roster-header,
 .teams-header {
-  margin-bottom: 30px;
-  padding-bottom: 10px;
-}
-
-.roster-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.teams-header {
-  text-align: left;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
 }
 
 .roster-title,
@@ -32,40 +23,31 @@
   font-weight: normal;
 }
 
-/* Simple buttons */
+/* Buttons */
 .teams-container button,
 .roster-container button {
   padding: 8px 16px;
   margin: 4px;
   border: 1px solid #ccc;
-  background-color:  #f8f9fa;
+  background-color: #f8f9fa;
   cursor: pointer;
   font-size: 14px;
 }
 
+.add-team-btn,
 .add-player-btn,
-.view-roster-btn {
-  background-color: #007bff !important;
+.view-roster-btn,
+.edit-btn {
+  background-color: #007bff;
   color: white;
   border: 1px solid #007bff;
 }
 
-.edit-btn {
-  background-color: #007bff !important;
-  color: white;
-  border: 1px solid #28a745;
-}
-
-.delete-btn {
-  background-color: #dc3545 !important;
+.delete-btn,
+.back-btn {
+  background-color: #dc3545;
   color: white;
   border: 1px solid #dc3545;
-}
-
-.back-btn {
-  background-color: #6c757d;
-  color: white;
-  border: 1px solid #6c757d;
 }
 
 /* Empty states */
@@ -76,7 +58,7 @@
   margin: 20px 0;
 }
 
-
+/* Cards */
 .player-card,
 .team-card {
   border: 2px solid #007bff;
@@ -108,66 +90,31 @@
   margin-top: 15px;
 }
 
-
-.players-container,
+/* Teams grid layout */
 .teams-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   margin: 20px 0;
 }
 
-
-.roster-footer {
-  text-align: center;
-  margin-top: 30px;
-  padding-top: 20px;
+.teams-list .team-card {
+  flex: 1 1 calc(33.333% - 20px);
+  min-width: 300px;
+  margin: 0;
 }
 
-.teams-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  padding-bottom: 10px;
-}
-
-.add-team-btn {
-  background-color: #007bff;
-  color: white;
-  border: 1px solid #007bff;
-  padding: 8px 16px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-
-
-/* Edit Form  */
-.edit-form-container {
+/* Forms */
+.edit-form-container,
+.create-form-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.edit-form-header {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-}
-
-.edit-form-title {
-  margin: 0;
-  font-size: 24px;
-}
-
-.edit-form-content {
-  margin: 20px 0;
-}
-
-.edit-form {
-  margin: 20px 0;
-}
-
-.form-group {
-  margin-bottom: 20px;
+.form-group,
+.form-field {
+  margin-bottom: 15px;
 }
 
 .form-label {
@@ -184,49 +131,26 @@
 }
 
 .form-buttons {
-  margin-top: 30px;
   display: flex;
+  flex-direction: column;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .update-btn {
   background-color: #007bff;
   color: white;
-  padding: 10px 20px;
+  padding: 12px;
   cursor: pointer;
+  border: none;
+  font-size: 16px;
 }
 
 .cancel-btn {
-  background-color: #6c757d;
+  background-color: #dc3545;
   color: white;
-  border: 1px solid #6c757d;
-  padding: 10px 20px;
+  padding: 12px;
   cursor: pointer;
-  text-align: center;
-}
-
-.create-form-container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-}
-/*teams*/
-.form-title {
-  margin-bottom: 20px;
-  text-decoration: underline;
-}
-
-.form-field {
-  margin-bottom: 15px;
-}
-
-.form-field label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-field input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
+  border: none;
+  font-size: 16px;
 }

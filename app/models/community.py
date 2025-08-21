@@ -15,7 +15,7 @@ class BlogPost(db.Model):
     title = db.Column(db.String(255), nullable=False)  
     content = db.Column(db.Text, nullable=False)  #the actual blog post, no limit on haracter count, may refine
     category = db.Column(db.String(255), nullable=False) # somethin like "Sleepers", "Trade Advice" etc, again, may refine or remove if i dont feel it's necessary
-
+    user = db.relationship('User', backref='blog_posts')
 
     def to_dict(self):
         return{
@@ -24,5 +24,5 @@ class BlogPost(db.Model):
             'title': self.title,
             'content': self.content,
             'category': self.category,
-            'author_name': 'Demo User',
+            'author_name': self.user.username,
         }

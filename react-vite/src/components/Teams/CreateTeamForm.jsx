@@ -31,14 +31,7 @@ function CreateTeamForm() {
     };
 
     await dispatch(createTeam(teamData));
-    
-    // Reset form
-    setName("");
-    setPlatform("");
-    setLeagueName("");
-    setLeagueSize("");
-    setScoringFormat("");
-  };
+  navigate('/teams');}
 
 return (
   <div className="create-form-container">
@@ -91,9 +84,10 @@ return (
           placeholder="Standard, PPR, Half-PPR"
         />
       </div>
-
-      <button type="submit">Create Team</button>
-      <button type="button" onClick={() => navigate('/teams')}>Cancel</button>
+<div className="form-buttons">
+  <button type="submit" className="create-team-btn">Create Team</button>
+  <button type="button" className="cancel-team-btn" onClick={() => navigate('/teams')}>Go back</button>
+</div>
     </form>
   </div>
 );

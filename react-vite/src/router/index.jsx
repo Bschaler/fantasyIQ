@@ -3,6 +3,7 @@ import { useSelector, useDispatch  } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loadTeams } from "../redux/teams";
+import { loadPosts } from "../redux/community";
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import TeamsIndex from '../components/Teams/TeamIndex';
@@ -31,11 +32,13 @@ function Home() {
   const navigate = useNavigate();
   const user = useSelector(state => state.session.user);
   const teams = useSelector(state => state.teams.userTeams);
+  const posts = useSelector(state => state.community.posts);
 
   // Load teams when component mounts
   useEffect(() => {
     if (user) {
       dispatch(loadTeams());
+      dispatch(loadPosts());
     }
   }, [dispatch, user]);
 
@@ -90,20 +93,30 @@ function Home() {
         <section className="activity-section">
           <h3>Your recent activity:</h3>
           <ul className="activity-list">
-            <li>Knsfkfsih</li>
-            <li>Jdjfsfkbf</li>
-            <li>Nsfksnfk</li>
+            <li>Work League team created</li>
+            <li>Work League Team: Tyler Higbee moved to bench</li>
+            <li>Anthony Richardson added to watchlist</li>
           </ul>
         </section>
 
-        <section className="blog-section">
-          <h3>Blog:</h3>
-          <ul className="blog-list">
-            <li>Jdkfjk</li>
-            <li>Fvnsjgbejj</li>
-            <li>kfmnknkrem</li>
-          </ul>
-        </section>
+    <section className="blog-section">
+      <h3>Blog:</h3>
+        <ul className="blog-list">
+          {posts && posts.length > 0 ? (
+            posts.slice(0, 3).map(post => (
+        <li key={post.id}>{post.title}</li>
+      ))
+    ) : (
+      <li>No recent posts</li>
+    )}
+  </ul>
+  <button 
+    className="view-btn" 
+    onClick={() => navigate('/community')}
+  >
+    View All Posts
+  </button>
+</section>
       </div>
     </div>
   );

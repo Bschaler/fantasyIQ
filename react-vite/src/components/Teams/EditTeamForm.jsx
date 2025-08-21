@@ -95,12 +95,10 @@ return (
           />
         </div>
 
-        <div className="form-buttons">
-          <button className="update-btn" type="submit">Update Team</button>
-          <button className="cancel-btn" type="button" onClick={() => navigate('/teams')}>
-            Cancel
-          </button>
-        </div>
+<div className="form-buttons">
+  <button type="submit" className="create-team-btn">Update Team</button>
+  <button type="button" className="cancel-team-btn" onClick={() => navigate('/teams')}>Go Back</button>
+</div>
       </form>
     </div>
   </div>
