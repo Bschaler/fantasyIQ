@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loadNotes, removeNote } from "../../redux/watchlist";
+import "./Watchlist.css";
 
 function WatchlistIndex() {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-/* Basic CSS matching wireframes */
+
 
 /* Main containers */
 .roster-container,
@@ -33,30 +33,31 @@
 }
 
 /* Simple buttons */
-button {
+.teams-container button,
+.roster-container button {
   padding: 8px 16px;
   margin: 4px;
   border: 1px solid #ccc;
-  background-color: #f8f9fa;
+  background-color:  #f8f9fa;
   cursor: pointer;
   font-size: 14px;
 }
 
 .add-player-btn,
 .view-roster-btn {
-  background-color: #007bff;
+  background-color: #007bff !important;
   color: white;
   border: 1px solid #007bff;
 }
 
 .edit-btn {
-  background-color: #28a745;
+  background-color: #007bff !important;
   color: white;
   border: 1px solid #28a745;
 }
 
 .delete-btn {
-  background-color: #dc3545;
+  background-color: #dc3545 !important;
   color: white;
   border: 1px solid #dc3545;
 }
@@ -75,10 +76,10 @@ button {
   margin: 20px 0;
 }
 
-/* Cards - simple rectangular boxes like wireframes */
+
 .player-card,
 .team-card {
-  border: 2px solid #000;
+  border: 2px solid #007bff;
   padding: 15px;
   margin: 15px 0;
   background-color: white;
@@ -99,7 +100,7 @@ button {
 .player-detail,
 .team-detail {
   margin: 5px 0;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .player-buttons,
@@ -107,13 +108,13 @@ button {
   margin-top: 15px;
 }
 
-/* Lists */
+
 .players-container,
 .teams-list {
   margin: 20px 0;
 }
 
-/* Footer */
+
 .roster-footer {
   text-align: center;
   margin-top: 30px;
@@ -139,7 +140,7 @@ button {
 
 
 
-/* Edit Form Styles */
+/* Edit Form  */
 .edit-form-container {
   max-width: 600px;
   margin: 0 auto;
@@ -178,7 +179,7 @@ button {
 .form-input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #007bff;
   font-size: 14px;
 }
 
@@ -189,9 +190,8 @@ button {
 }
 
 .update-btn {
-  background-color: #28a745;
+  background-color: #007bff;
   color: white;
-  border: 1px solid #28a745;
   padding: 10px 20px;
   cursor: pointer;
 }
@@ -202,6 +202,7 @@ button {
   border: 1px solid #6c757d;
   padding: 10px 20px;
   cursor: pointer;
+  text-align: center;
 }
 
 .create-form-container {
@@ -209,9 +210,10 @@ button {
   margin: 0 auto;
   padding: 20px;
 }
-
+/*teams*/
 .form-title {
   margin-bottom: 20px;
+  text-decoration: underline;
 }
 
 .form-field {

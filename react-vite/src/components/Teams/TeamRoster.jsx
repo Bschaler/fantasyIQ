@@ -20,9 +20,9 @@ function TeamRoster() {
   const teamPlayers = allPlayers.filter(player => player.team_id === parseInt(teamId));
   const teamName = teamPlayers.length > 0 ? teamPlayers[0].team_name : 'Team';
 
-  const handleEdit = (playerId) => {
-    window.location.href = `/roster/${playerId}/edit`;
-  };
+const handleEdit = (playerId) => {
+  navigate(`/teams/${teamId}/roster/${playerId}/edit`);
+};
 
   const handleDelete = (playerId) => {
     if (window.confirm("Remove this player from roster?")) {

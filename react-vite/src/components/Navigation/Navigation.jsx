@@ -22,7 +22,7 @@ function Navigation() {
         </NavLink>
         
         {user ? (
-          // Logged in - show full navigation
+    
           <>
             <ul className="main-nav">
               <li><NavLink to="/teams">My Teams</NavLink></li>
@@ -36,7 +36,7 @@ function Navigation() {
             </button>
           </>
         ) : (
-          // Not logged in - show login/signup buttons
+
           <div className="auth-buttons">
             <OpenModalMenuItem
               itemText="Log In"

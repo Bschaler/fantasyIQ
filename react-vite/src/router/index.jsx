@@ -16,10 +16,8 @@ import TradesIndex from '../components/Trades/TradesIndex';
 import CreateTradeForm from '../components/Trades/CreateTradeForm';
 import EditTradeForm from '../components/Trades/EditTradeForm'; 
 import DeleteTrade from '../components/Trades/DeleteTrade';
-import RosterIndex from '../components/Roster/RosterIndex';    
-import CreatePlayerForm from '../components/Roster/CreatePlayerForm'; 
-import EditPlayerForm from '../components/Roster/EditPlayerForm';    
-import DeletePlayer from '../components/Roster/DeletePlayer'; 
+import CreatePlayerForm from '../components/Teams/CreatePlayerForm'; 
+import EditPlayerForm from '../components/Teams/EditPlayerForm';    
 import CommunityIndex from '../components/Community/CommunityIndex';
 import CreatePostForm from '../components/Community/CreatePostForm';
 import EditPostForm from '../components/Community/EditPostForm';
@@ -147,6 +145,10 @@ export const router = createBrowserRouter([
     path: "teams/:teamId/edit",
     element: <EditTeamForm />,
       },
+      {
+      path: "teams/:teamId/roster/:playerId/edit",
+      element: <EditPlayerForm />,
+      },
 
       {
         path: "watchlist",
@@ -177,22 +179,8 @@ export const router = createBrowserRouter([
         path: "trades/:tradeId/delete",
         element: <DeleteTrade />,
       },
-      {
-        path: "roster",
-        element: <RosterIndex />,
-      },
-      {
-        path: "roster/new",
-        element: <CreatePlayerForm />,
-      },
-      {
-        path: "roster/:playerId/edit",
-        element: <EditPlayerForm />,
-      },
-      {
-        path: "roster/:playerId/delete",
-        element: <DeletePlayer />,
-      },
+ 
+
       {
         path: "community",
         element: <CommunityIndex />,

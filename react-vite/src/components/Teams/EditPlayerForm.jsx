@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadPlayers, editPlayer } from "../../redux/roster";
 
 function EditPlayerForm() {
-  const { playerId } = useParams();
+  const { teamId, playerId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const players = useSelector((state) => state.roster.players);
@@ -41,22 +41,13 @@ function EditPlayerForm() {
       roster_position: rosterPosition
     };
 
-    await dispatch(editPlayer(playerId, playerData));
-    if (player && player.team_id) {
-      navigate(`/teams/${player.team_id}/roster`);
-    } else {
-      navigate('/teams'); 
-    }
-  };
+   await dispatch(editPlayer(playerId, playerData));
+  navigate(`/teams/${teamId}/roster`); 
+};
 
-    const handleCancel = () => {
-
-    if (player && player.team_id) {
-      navigate(`/teams/${player.team_id}/roster`);
-    } else {
-      navigate('/teams');
-    }
-  };
+  const handleCancel = () => {
+  navigate(`/teams/${teamId}/roster`); 
+};
 
   if (!player) {
     return <div>Loading...</div>;
