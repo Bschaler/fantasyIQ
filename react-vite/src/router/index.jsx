@@ -11,6 +11,7 @@ import TeamRoster from '../components/Teams/TeamRoster';
 import EditTeamForm from '../components/Teams/EditTeamForm'; 
 import WatchlistIndex from '../components/Watchlist/WatchlistIndex';
 import CreateNoteForm from '../components/Watchlist/CreateNoteForm';
+import EditNoteForm from '../components/Watchlist/EditNoteForm';
 import TradesIndex from '../components/Trades/TradesIndex';
 import CreateTradeForm from '../components/Trades/CreateTradeForm';
 import EditTradeForm from '../components/Trades/EditTradeForm'; 
@@ -154,7 +155,12 @@ export const router = createBrowserRouter([
       {
         path: "watchlist/new",
         element: <CreateNoteForm />,
+
       },
+      {
+      path: "watchlist/:noteId/edit", 
+       element: <EditNoteForm />,    
+},
       {
         path: "trades",
         element: <TradesIndex />,

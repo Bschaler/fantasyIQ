@@ -15,6 +15,11 @@ function CreatePlayerForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+      if (!name || !position || !nflTeam || !rosterPosition) {
+      alert("Please fill out all fields before submitting.");
+      return;
+    }
+
     const playerData = {
       team_id: teamId ? parseInt(teamId) : 1,
       name,

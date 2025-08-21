@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import db, Team
+from app.models import db, Team, Roster
 
 
 teams_routes = Blueprint('teams', __name__)
@@ -50,8 +50,12 @@ def update_team(team_id):
 @teams_routes.route('/<int:team_id>', methods=['DELETE'])
 @login_required
 def delete_team(team_id):
+ 
+        team = Team.query.get(team_id)
     
-    team = Team.query.get(team_id)
-    db.session.delete(team)
-    db.session.commit()
-    return {'message': 'Team has been deleted'}
+
+        Roster.query.filter(Roster.team_id == team_id).delete()
+
+        db.session.delete(team)
+        db.session.commit()
+        return {'message': 'Team has been deleted'}

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createNote } from "../../redux/watchlist";
 
 function CreateNoteForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [playerName, setPlayerName] = useState("");
   const [position, setPosition] = useState("");
   const [teamAbbr, setTeamAbbr] = useState("");
@@ -13,6 +15,12 @@ function CreateNoteForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!playerName || !position || !teamAbbr || !notes || !interestLevel) {
+      alert("Please fill out all fields before submitting.");
+      return;
+    }
+
 
     const noteData = {
       player_name: playerName,
@@ -24,24 +32,19 @@ function CreateNoteForm() {
     };
 
     await dispatch(createNote(noteData));
+
+ 
     
-    
-    
-    // Resets form
-    setPlayerName("");
-    setPosition("");
-    setTeamAbbr("");
-    setNotes("");
-    setInterestLevel("");
-    setIsWatchlist(true);
+  
+    navigate('/watchlist'); 
   };
 
   return (
-    <div>
-      <h1>Add Player Note</h1>
+    <div className="create-note-container">
+      <h1 className="form-title">Add Player Note</h1>
       
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-field">
           <label>Player Name</label>
           <input
             type="text"
@@ -51,7 +54,7 @@ function CreateNoteForm() {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label>Position</label>
           <input
             type="text"
@@ -61,7 +64,7 @@ function CreateNoteForm() {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label>NFL Team</label>
           <input
             type="text"
@@ -71,7 +74,7 @@ function CreateNoteForm() {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label>Notes</label>
           <textarea
             value={notes}
@@ -80,8 +83,7 @@ function CreateNoteForm() {
           />
         </div>
 
-        
-        <div>
+        <div className="form-field">
           <label>Interest Level</label>
           <input
             type="text"
@@ -91,9 +93,8 @@ function CreateNoteForm() {
           />
         </div>
 
-        
-        <div>
-          <label>
+        <div className="form-field">
+          <label className="checkbox-label">
             <input
               type="checkbox"
               checked={isWatchlist}
@@ -104,6 +105,9 @@ function CreateNoteForm() {
         </div>
 
         <button type="submit">Add Player Note</button>
+        <button type="button" onClick={() => navigate('/watchlist')}>
+          Cancel
+        </button>
       </form>
     </div>
   );

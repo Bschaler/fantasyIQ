@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadNotes, editNote } from "../../redux/watchlist";
 
 function EditNoteForm() {
   const { noteId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const notes = useSelector((state) => state.watchlist.playerNotes);
   const note = notes.find(note => note.id === parseInt(noteId));
 
@@ -34,6 +35,11 @@ function EditNoteForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+        if (!playerName || !position || !teamAbbr || !notes || !interestLevel) {
+      alert("Please fill out all fields before submitting.");
+      return;
+    }
+
     const noteData = {
       player_name: playerName,
       position,
@@ -44,18 +50,20 @@ function EditNoteForm() {
     };
 
     await dispatch(editNote(noteId, noteData));
+    navigate('/watchlist');    
   };
 
   if (!note) {
     return <div>Loading...</div>;
   }
-
   return (
-    <div>
-      <h1>Edit Player Note</h1>
+
+
+    <div className="create-note-container">
+      <h1 className="form-title">Edit Player Note</h1>
       
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-field">
           <label>Player Name</label>
           <input
             type="text"
@@ -64,7 +72,8 @@ function EditNoteForm() {
           />
         </div>
 
-        <div>
+        
+        <div className="form-field">
           <label>Position</label>
           <input
             type="text"
@@ -73,7 +82,8 @@ function EditNoteForm() {
           />
         </div>
 
-        <div>
+        
+        <div className="form-field">
           <label>NFL Team</label>
           <input
             type="text"
@@ -82,7 +92,8 @@ function EditNoteForm() {
           />
         </div>
 
-        <div>
+       
+        <div className="form-field">
           <label>Notes</label>
           <textarea
             value={noteText}
@@ -90,7 +101,8 @@ function EditNoteForm() {
           />
         </div>
 
-        <div>
+       
+       <div className="form-field">
           <label>Interest Level</label>
           <input
             type="text"
@@ -99,8 +111,8 @@ function EditNoteForm() {
           />
         </div>
 
-        <div>
-          <label>
+        <div className="form-field">
+          <label className="checkbox-label">
             <input
               type="checkbox"
               checked={isWatchlist}
@@ -111,6 +123,9 @@ function EditNoteForm() {
         </div>
 
         <button type="submit">Update Note</button>
+        <button type="button" onClick={() => navigate('/watchlist')}>
+          Cancel
+        </button>
       </form>
     </div>
   );

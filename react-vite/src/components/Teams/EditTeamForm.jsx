@@ -35,6 +35,12 @@ function EditTeamForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!name || !platform || !leagueName || !leagueSize || !scoringFormat) {
+      alert("Please fill out all fields before submitting.");
+      return;
+    }
+
+
     const teamData = {
       name,
       platform,
