@@ -1,131 +1,105 @@
-# Flask React Project
+# FantasyIQ
 
-This is the starter for the Flask React project.
+Fantasy football app I made for my capstone project. Helps you manage your fantasy teams and keep track of players.
 
-## Getting started
+## What it does
 
-1. Clone this repository (only this branch).
+Basically you can add your fantasy teams, write notes on players you want to target, plan out trades, and post about fantasy stuff. I play a lot of fantasy football so I wanted to build something I’d actually use.
 
-2. Install dependencies.
+The main thing is you can have all your fantasy info in one place instead of random notes on your phone or whatever.
 
-   ```bash
-   pipenv install -r requirements.txt
-   ```
+## Tech used
 
-3. Create a __.env__ file based on the example with proper settings for your
-   development environment.
+- Flask for the backend
+- React for the frontend
+- SQLAlchemy for database stuff
+- Redux for state management
+- SQLite database (switches to PostgreSQL when deployed)
 
-4. Make sure the SQLite3 database connection URL is in the __.env__ file.
+## Running the app
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention.**
+Make sure you have Python and Node.js installed.
 
-6. Get into your pipenv, migrate your database, seed your database, and run your
-   Flask app:
+**Backend:**
 
-   ```bash
-   pipenv shell
-   ```
+```
+git clone [repo-url]
+cd fantasyiq
+pipenv install -r requirements.txt
+pipenv shell
+flask db upgrade
+flask seed all
+flask run -p 8000
+```
 
-   ```bash
-   flask db upgrade
-   ```
+**Frontend:**
+Open another terminal and do:
 
-   ```bash
-   flask seed all
-   ```
+```
+cd react-vite
+npm install
+npm run build
+```
 
-   ```bash
-   flask run
-   ```
+Then go to localhost:8000 and hit the Demo button to see it working.
 
-7. The React frontend has no styling applied. Copy the __.css__ files from your
-   Authenticate Me project into the corresponding locations in the
-   __react-vite__ folder to give your project a unique look.
+## Main features
 
-8. To run the React frontend in development, `cd` into the __react-vite__
-   directory and run `npm i` to install dependencies. Next, run `npm run build`
-   to create the `dist` folder. The starter has modified the `npm run build`
-   command to include the `--watch` flag. This flag will rebuild the __dist__
-   folder whenever you change your code, keeping the production version up to
-   date.
+**Teams:** Add your fantasy teams from ESPN, Yahoo, etc. You can add players to each team’s roster.
 
-## Deployment through Render.com
+**Watchlist:** Keep notes on players you want to pick up. Rate how much you want them 1-10.
 
-First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
-the root of your __react-vite__ folder when you push to GitHub. This __dist__
-folder contains your React code and all necessary dependencies minified and
-bundled into a smaller footprint, ready to be served from your Python API.
+**Trades:** Plan out trades before you send them. Write down who you’d trade and who you want back.
 
-Begin deployment by running `npm run build` in your __react-vite__ folder and
-pushing any changes to GitHub.
+**Community:** Post about fantasy stuff like sleeper picks or start/sit advice.
 
-Refer to your Render.com deployment articles for more detailed instructions
-about getting started with [Render.com], creating a production database, and
-deployment debugging tips.
+## Database tables
 
-From the Render [Dashboard], click on the "New +" button in the navigation bar,
-and click on "Web Service" to create the application that will be deployed.
+- users (login info)
+- teams (your fantasy teams)
+- roster (players on each team)
+- player_notes (your watchlist)
+- trade_scenarios (planned trades)
+- blog_posts (community posts)
 
-Select that you want to "Build and deploy from a Git repository" and click
-"Next". On the next page, find the name of the application repo you want to
-deploy and click the "Connect" button to the right of the name.
+## API stuff
 
-Now you need to fill out the form to configure your app. Most of the setup will
-be handled by the __Dockerfile__, but you do need to fill in a few fields.
+The backend has routes for each feature:
 
-Start by giving your application a name.
+- /api/auth - login/signup
+- /api/teams - team CRUD
+- /api/notes - player notes CRUD
+- /api/trades - trade scenarios CRUD
+- /api/roster - roster management
+- /api/community - blog posts
 
-Make sure the Region is set to the location closest to you, the Branch is set to
-"main", and Runtime is set to "Docker". You can leave the Root Directory field
-blank. (By default, Render will run commands from the root directory.)
+Pretty standard REST API setup.
 
-Select "Free" as your Instance Type.
+## Deployment
 
-### Add environment variables
+Set up to deploy on Render. You build the React app, push to GitHub, then connect it to Render and set the environment variables.
 
-In the development environment, you have been securing your environment
-variables in a __.env__ file, which has been removed from source control (i.e.,
-the file is gitignored). In this step, you will need to input the keys and
-values for the environment variables you need for production into the Render
-GUI.
+## Demo login
 
-Add the following keys and values in the Render GUI form:
+There’s a demo button that logs you in with fake data so you can see how it works without making an account.
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
+## Future stuff
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+Want to add real player stats and maybe connect to actual ESPN/ yahoo leagues. Also implement AI to grade trade scores(good, bad, and the ugly), and maybe even "must pick up" for free agents in the league.
 
-Add the following keys and values:
+## structure
 
-- DATABASE_URL (copy value from the **External Database URL** field)
+```
+app/                 # Flask
+  api/               # Route files
+  models/            # Database models
+  
+react-vite/          # React
+  src/
+    components/      # React components
+    redux/           # State management
+```
 
-**Note:** Add any other keys and values that may be present in your local
-__.env__ file. As you work to further develop your project, you may need to add
-more environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment.
+## Notes
 
-### Deploy
-
-Now you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your Dockerfile
-commands being executed and any errors that occur.
-
-When deployment is complete, open your deployed site and check to see that you
-have successfully deployed your Flask application to Render! You can find the
-URL for your site just below the name of the Web Service at the top of the page.
-
-**Note:** By default, Render will set Auto-Deploy for your project to true. This
-setting will cause Render to re-deploy your application every time you push to
-main, always keeping it up to date.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+Built this over a few weeks for my bootcamp final project. Covers full-stack development with user auth, database relationships, and a React frontend. The styling is pretty basic but it works, definitely want to spice it up more
