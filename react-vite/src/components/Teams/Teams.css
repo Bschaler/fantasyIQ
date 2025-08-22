@@ -6,6 +6,13 @@
   padding: 20px;
 }
 
+.edit-form-container,
+.create-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 /* Headers */
 .roster-header,
 .teams-header {
@@ -23,7 +30,6 @@
 .teams-title {
   margin: 0;
   font-size: 24px;
-  font-weight: normal;
   text-decoration: underline;
   text-decoration-color:#007bff;
 }
@@ -48,6 +54,18 @@
   border: 1px solid #007bff !important;
 }
 
+.update-btn {
+  background-color: #007bff !important;
+  color: white !important;
+  padding: 12px;
+  cursor: pointer;
+  border: none !important;
+  font-size: 16px;
+}
+.update-btn:hover {
+  background-color: #0056b3 !important;
+}
+
 .delete-btn,
 .back-btn {
   background-color: #dc3545 !important;
@@ -58,13 +76,20 @@
 .back-btn:hover {
   background-color: #c82333 !important;
 }
-/* Empty states */
-.empty-roster,
-.empty-teams {
-  text-align: center;
-  padding: 40px;
-  margin: 20px 0;
+
+.cancel-btn {
+  background-color: #dc3545 !important;
+  color: white !important;
+  padding: 12px;
+  cursor: pointer;
+  border: none !important;
+  font-size: 16px;
 }
+.cancel-btn:hover {
+  background-color: #c82333 !important;
+}
+
+
 
 /* Cards */
 .player-card,
@@ -107,18 +132,12 @@
 }
 
 .teams-list .team-card {
-  flex: 1 1 calc(33.333% - 20px);
+  flex: 1;
   min-width: 300px;
   margin: 0;
 }
 
 /* Forms */
-.edit-form-container,
-.create-form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-}
 
 .form-group,
 .form-field {
@@ -145,25 +164,10 @@
   margin-top: 20px;
 }
 
-.update-btn {
-  background-color: #007bff !important;
-  color: white !important;
-  padding: 12px;
-  cursor: pointer;
-  border: none !important;
-  font-size: 16px;
-}
-.update-btn:hover {
-  background-color: #0056b3 !important;
-}
-.cancel-btn {
-  background-color: #dc3545 !important;
-  color: white !important;
-  padding: 12px;
-  cursor: pointer;
-  border: none !important;
-  font-size: 16px;
-}
-.cancel-btn:hover {
-  background-color: #c82333 !important;
+/*emptiness*/
+.empty-roster,
+.empty-teams {
+  text-align: center;
+  padding: 40px;
+  margin: 20px 0;
 }

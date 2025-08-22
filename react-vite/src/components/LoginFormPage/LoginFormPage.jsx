@@ -36,7 +36,7 @@ function LoginFormPage() {
   return (
     <>
       <h1>Log In</h1>
-         <p style={{color: "red", fontSize: "20px"}}>🔴 TEST - CAN YOU SEE THIS?</p>
+   
       {errors.length > 0 &&
         errors.map((message) => <p key={message}>{message}</p>)}
       <form onSubmit={handleSubmit}>

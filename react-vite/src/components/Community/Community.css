@@ -29,7 +29,6 @@
 .community-title {
   margin: 0 0 20px 0;
   font-size: 24px;
-  font-weight: normal;
 }
 
 .add-post-btn {
@@ -39,6 +38,5 @@
   padding: 8px 16px;
   cursor: pointer;
   font-size: 14px;
-  display: block;
   margin: 0 auto;
 }

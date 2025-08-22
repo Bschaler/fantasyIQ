@@ -44,6 +44,7 @@ function CreateNoteForm() {
       <h1 className="form-title">Add Player Note</h1>
       
       <form onSubmit={handleSubmit}>
+        
         <div className="form-field">
           <label>Player Name</label>
           <input
@@ -105,9 +106,11 @@ function CreateNoteForm() {
         </div>
 
         <button type="submit">Add Player Note</button>
-        <button type="button" onClick={() => navigate('/watchlist')}>
+       
+       <button type="button" onClick={() => navigate('/watchlist')}>
           Cancel
         </button>
+
       </form>
     </div>
   );

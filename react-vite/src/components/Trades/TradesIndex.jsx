@@ -29,20 +29,25 @@ const handleDelete = (tradeId) => {
   
   return (
   <div className="trades-container">
+    
     <div className="trades-header">
+      
       <h1 className="trades-title">My Trade Scenarios</h1>
+      
       <button className="add-trade-btn" onClick={() => navigate('/trades/new')}>
         Add Trade
       </button>
     </div>
     
     {trades.length === 0 ? (
+      
       <div className="empty-trades">
         <p>No trade scenarios yet! Create your first trade idea.</p>
       </div>
     ) : (
       <div className="trades-list">
         {trades.map((trade) => (
+          
           <div key={trade.id} className="trade-card">
             <h3>{trade.title}</h3>
             <p><strong>My Players:</strong> {trade.my_players}</p>
@@ -54,6 +59,7 @@ const handleDelete = (tradeId) => {
             <div className="trade-buttons">
               <button className="edit-btn" onClick={() => navigate(`/trades/${trade.id}/edit`)}>Edit</button>
               <button className="delete-btn" onClick={() => handleDelete(trade.id)}>Delete</button>
+            
             </div>
           </div>
         ))}

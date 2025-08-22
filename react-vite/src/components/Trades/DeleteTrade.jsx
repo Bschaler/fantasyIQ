@@ -39,7 +39,9 @@ function DeleteTrade() {
         </div>
 
         <button onClick={handleDelete}>Yes, Delete Trade</button>
+        
         <button>Cancel</button>
+      
       </div>
     </div>
   );
