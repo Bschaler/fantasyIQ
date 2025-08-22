@@ -25,7 +25,7 @@ function TeamsIndex() {
   };
 
     const handleAddTeam = () => {
-    navigate('/teams/new'); // Navigate to create team form
+    navigate('/teams/new'); // Navigates
   };
 
 

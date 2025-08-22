@@ -45,6 +45,7 @@ def update_team(team_id):
     team.scoring_format = data['scoring_format']
     
     db.session.commit()
+#   print(f"Team updated: {team.to_dict()}")
     return team.to_dict()
 
 @teams_routes.route('/<int:team_id>', methods=['DELETE'])
@@ -58,4 +59,5 @@ def delete_team(team_id):
 
         db.session.delete(team)
         db.session.commit()
+    #    print(f"Team deleted: ID {team_id}")
         return {'message': 'Team has been deleted'}

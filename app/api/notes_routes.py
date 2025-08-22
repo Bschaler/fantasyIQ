@@ -27,6 +27,7 @@ def create_note():
     
     db.session.add(new_note)
     db.session.commit()
+    #print(f"Note created: {new_note.to_dict()}")
     return new_note.to_dict(), 201
 
 @notes_routes.route('/<int:note_id>', methods=['PUT'])
@@ -43,6 +44,7 @@ def update_note(note_id):
     note.is_watchlist = data['is_watchlist']
     
     db.session.commit()
+    #print(f"Note updated: {note.to_dict()}")
     return note.to_dict()
 
 @notes_routes.route('/<int:note_id>', methods=['DELETE'])
@@ -51,4 +53,5 @@ def delete_note(note_id):
     note = PlayerNote.query.get(note_id)
     db.session.delete(note)
     db.session.commit()
+    print(f"Note deleted: ID {note_id}")
     return {'message': 'Player note has been deleted'}
