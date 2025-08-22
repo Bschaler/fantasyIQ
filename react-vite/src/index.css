@@ -142,12 +142,14 @@ body {
 .auth-buttons li {
   list-style: none;
   padding: 0.5rem 1rem;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
   cursor: pointer;
   font-weight: normal;
 }
 
 .auth-buttons li:hover {
-  background-color: #e0e0e0;
+  background-color: #0056b3;
+  border: 1px solid #0056b3;;
 }

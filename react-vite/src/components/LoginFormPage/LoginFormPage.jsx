@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { thunkLogin } from "../../redux/session";
+import { thunkLogin} from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./LoginForm.css";
@@ -31,9 +31,12 @@ function LoginFormPage() {
     }
   };
 
+  
+
   return (
     <>
       <h1>Log In</h1>
+         <p style={{color: "red", fontSize: "20px"}}>🔴 TEST - CAN YOU SEE THIS?</p>
       {errors.length > 0 &&
         errors.map((message) => <p key={message}>{message}</p>)}
       <form onSubmit={handleSubmit}>
@@ -59,6 +62,7 @@ function LoginFormPage() {
         {errors.password && <p>{errors.password}</p>}
  <button type="submit" className="login-submit-btn">Log In</button>
       </form>
+
     </>
   );
 }

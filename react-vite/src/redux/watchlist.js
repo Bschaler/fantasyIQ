@@ -5,6 +5,10 @@ const ADD_NOTE = 'watchlist/ADD_NOTE';
 const UPDATE_NOTE = 'watchlist/UPDATE_NOTE';
 const DELETE_NOTE = 'watchlist/DELETE_NOTE';
 
+const SET_ERROR = 'watchlist/SET_ERROR';
+const CLEAR_ERROR = 'watchlist/CLEAR_ERROR';
+const SET_LOADING = 'watchlist/SET_LOADING';
+
 
 const getNotes = (notes) => ({
   type: GET_NOTES,
@@ -26,17 +30,48 @@ const deleteNote = (noteId) => ({
   noteId
 });
 
+const setError = (error) => ({
+  type: SET_ERROR,
+  error
+});
+
+const clearError = () => ({
+  type: CLEAR_ERROR
+});
+
+const setLoading = (loading) => ({
+  type: SET_LOADING,
+  loading
+});
+
 // Thunkin'
 export const loadNotes = () => async (dispatch) => {
+      try {
+    dispatch(setLoading(true));
+    dispatch(clearError());
+
+
   const response = await fetch('/api/notes');
   
   if (response.ok) {
     const data = await response.json();
     dispatch(getNotes(data.notes));
+  }else {
+      throw new Error('Failed to load notes');
+    }
+  } catch (error) {
+    console.error('Load notes error:', error);
+    dispatch(setError('Unable to load watchlist. Please try again.'));
+  } finally {
+    dispatch(setLoading(false));
   }
 };
 
 export const createNote = (noteData) => async (dispatch) => {
+
+      try {
+    dispatch(clearError());
+
   const response = await fetch('/api/notes', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -46,11 +81,23 @@ export const createNote = (noteData) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addNote(data));
+        return { success: true }; 
+    } else {
+      throw new Error('Failed to create note'); 
+    }
+  } catch (error) {
+    console.error('note error:', error);
+    dispatch(setError('Unable to create note. Please try again.'));
+    return { success: false, error: error.message }; 
   }
 };
 
 export const editNote = (noteId, noteData) => async (dispatch) => {
-  const response = await fetch(`/api/notes/${noteId}`, {
+      try {
+    dispatch(clearError());
+  
+  
+    const response = await fetch(`/api/notes/${noteId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(noteData)
@@ -59,23 +106,46 @@ export const editNote = (noteId, noteData) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(updateNote(data));
-    return data;
+       return { success: true, data }; 
+    } else {
+      throw new Error('Failed to update note');  
+    }
+  } catch (error) {
+    console.error('Edit note error:', error);
+    dispatch(setError('Cant update note. try again.'));
+    return { success: false, error: error.message }; 
   }
 };
 
+
 export const removeNote = (noteId) => async (dispatch) => {
+     try {
+    dispatch(clearError());
+
+
   const response = await fetch(`/api/notes/${noteId}`, {
     method: 'DELETE'
   });
 
   if (response.ok) {
     dispatch(deleteNote(noteId));
-    return noteId;
+      return { success: true, noteId }; // ADD THIS - Return success with noteId
+    } else {
+      throw new Error('Failed to delete note'); // ADD THIS - Throw error for non-ok responses
+    }
+  } catch (error) {
+    console.error('Remove note error:', error);
+    dispatch(setError('Unable to delete note. Please try again.'));
+    return { success: false, error: error.message }; // ADD THIS - Return error indicator
   }
 };
+
+
 // Reducin'
 const initialState = {
-  playerNotes: []
+  playerNotes: [],
+  loading: false,
+  error: null
 };
 
 function watchlistReducer(state = initialState, action) {
@@ -123,6 +193,15 @@ function watchlistReducer(state = initialState, action) {
         playerNotes: filteredNotes 
       };
     }
+      
+    case SET_ERROR:
+      return { ...state, error: action.error };
+    
+    case CLEAR_ERROR:
+      return { ...state, error: null };
+    
+    case SET_LOADING:
+      return { ...state, loading: action.loading };
       
     default:
       return state;

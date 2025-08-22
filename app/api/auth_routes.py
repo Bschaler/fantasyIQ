@@ -33,6 +33,24 @@ def login():
         return user.to_dict()
     return form.errors, 401
 
+@auth_routes.route('/demo', methods=['POST'])
+def demo_login():
+
+    demo_user = User.query.filter(User.email == 'demo@fantasyiq.com').first()
+    
+  
+    if not demo_user:
+        demo_user = User(
+            username='DemoUser',
+            email='demo@fantasyiq.com',
+            password='demopassword' 
+        )
+        db.session.add(demo_user)
+        db.session.commit()
+    
+
+    login_user(demo_user)
+    return demo_user.to_dict()
 
 @auth_routes.route('/logout')
 def logout():

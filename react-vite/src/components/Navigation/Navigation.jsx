@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkLogout } from "../../redux/session";
+import { thunkLogout, thunkDemoLogin } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
@@ -46,6 +46,20 @@ function Navigation() {
               itemText="Sign Up"
               modalComponent={<SignupFormModal />}
             />
+             <button 
+    onClick={() => dispatch(thunkDemoLogin())}
+    style={{
+      padding: "0.5rem 1rem",
+      backgroundColor: "#28a745",
+      color: "white",
+      border: "1px solid #28a745",
+      cursor: "pointer",
+      fontSize: "14px",
+      borderRadius: "4px"
+    }}
+  >
+    Demo
+  </button>
           </div>
         )}
       </div>
