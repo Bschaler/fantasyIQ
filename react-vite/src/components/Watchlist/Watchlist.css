@@ -13,7 +13,10 @@
   font-size: 24px;
   font-weight: bold;
   text-decoration: underline;
-  text-decoration-color: #007bff
+  text-decoration-color: #007bff;
+  padding-top: 15px;
+  
+  
 }
 
 .add-note-btn {
@@ -23,6 +26,10 @@
   padding: 8px 16px;
   cursor: pointer;
 
+}
+
+.add-note-btn:hover {
+  background-color: #0056b3 !important;
 }
 
 .edit-btn {
