@@ -23,6 +23,7 @@ function EditNoteForm() {
 
   useEffect(() => {
     if (note) {
+    console.log("Editing note for player:", note.player_name);
       setPlayerName(note.player_name);
       setPosition(note.position);
       setTeamAbbr(note.team_abbr);

@@ -24,6 +24,7 @@ function EditTeamForm() {
 
   useEffect(() => {
     if (team) {
+   console.log("Editing team:", team.name);
       setName(team.name);
       setPlatform(team.platform);
       setLeagueName(team.league_name);

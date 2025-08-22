@@ -136,7 +136,8 @@ export const removeTeam = (teamId) => async (dispatch) => {
  // console.log('Delete ok??:', response.ok);
 
   if (response.ok) {
-        console.log('Dispatching deleteTeam action');
+    console.log('Team deleted successfully');
+    
     dispatch(deleteTeam(teamId));
       return { success: true }; 
     } else {
