@@ -1,7 +1,7 @@
 .watchlist-container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 2px;
+  padding: 20px;
 }
 
 .watchlist-header {
@@ -43,7 +43,7 @@
 
 
 .delete-btn {
-  background-color: #dc3545;
+  background-color: #dc3545 !important;
   color: white;
   border: 1px solid #dc3545;
   padding: 8px 16px;
@@ -81,4 +81,33 @@
 .empty-watchlist {
   text-align: center;
   padding: 40px;
+}
+
+form button {
+  width: 100%;
+  padding: 8px 16px !important;
+  margin: 4px 0;
+  font-size: 14px !important;
+  cursor: pointer;
+  border: 1px solid;
+}
+
+form button[type="submit"] {
+  background-color: #007bff !important;
+  color: white !important;
+  border-color: #007bff !important;
+}
+
+form button[type="submit"]:hover {
+  background-color: #0056b3 !important;
+}
+
+form button[type="button"] {
+  background-color: #dc3545 !important;
+  color: white !important;
+  border-color: #dc3545 !important;
+}
+
+form button[type="button"]:hover {
+  background-color: #c82333 !important;
 }
