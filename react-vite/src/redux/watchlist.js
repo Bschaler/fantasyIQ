@@ -14,7 +14,6 @@ const getNotes = (notes) => ({
   type: GET_NOTES,
   notes
 });
-
 const addNote = (note) => ({
   type: ADD_NOTE,
   note
@@ -57,11 +56,12 @@ export const loadNotes = () => async (dispatch) => {
     const data = await response.json();
     dispatch(getNotes(data.notes));
   }else {
+   console.log("Failed to load the notes from server");
       throw new Error('Failed to load notes');
     }
   } catch (error) {
     console.error('Load notes error:', error);
-    dispatch(setError('Unable to load watchlist. Please try again.'));
+    dispatch(setError('Unable to load watchlist.try again.'));
   } finally {
     dispatch(setLoading(false));
   }
@@ -87,7 +87,7 @@ export const createNote = (noteData) => async (dispatch) => {
     }
   } catch (error) {
     console.error('note error:', error);
-    dispatch(setError('Unable to create note. Please try again.'));
+    dispatch(setError('Unable to create your note. Please try again.'));
     return { success: false, error: error.message }; 
   }
 };
@@ -108,10 +108,11 @@ export const editNote = (noteId, noteData) => async (dispatch) => {
     dispatch(updateNote(data));
        return { success: true, data }; 
     } else {
-      throw new Error('Failed to update note');  
+      throw new Error('Failed to update the note');  
     }
   } catch (error) {
-    console.error('Edit note error:', error);
+console.error('Edit note error:', error);
+
     dispatch(setError('Cant update note. try again.'));
     return { success: false, error: error.message }; 
   }
@@ -129,14 +130,15 @@ export const removeNote = (noteId) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(deleteNote(noteId));
-      return { success: true, noteId }; // ADD THIS - Return success with noteId
+      return { success: true, noteId }; 
     } else {
-      throw new Error('Failed to delete note'); // ADD THIS - Throw error for non-ok responses
+      throw new Error('Failed to delete note');
     }
   } catch (error) {
     console.error('Remove note error:', error);
+
     dispatch(setError('Unable to delete note. Please try again.'));
-    return { success: false, error: error.message }; // ADD THIS - Return error indicator
+    return { success: false, error: error.message }; 
   }
 };
 
@@ -151,7 +153,7 @@ const initialState = {
 function watchlistReducer(state = initialState, action) {
   switch (action.type) {      
     case GET_NOTES: {   
-      console.log('setting notes:', action.notes);
+console.log('setting notes:', action.notes);
       return { 
         ...state, 
         playerNotes: action.notes,
@@ -160,7 +162,7 @@ function watchlistReducer(state = initialState, action) {
     }
     case ADD_NOTE:{
       console.log('adding note:', action.note);
-      const newNotes = [...state.playerNotes, action.note];
+    const newNotes = [...state.playerNotes, action.note];
       return { 
         ...state, 
         playerNotes: newNotes 
@@ -173,7 +175,7 @@ function watchlistReducer(state = initialState, action) {
       const updatedNotes = state.playerNotes.map(note => {
         if (note.id === action.note.id) {
           return action.note;
-        } else {
+    } else {
           return note;
         }
       });
@@ -185,7 +187,7 @@ function watchlistReducer(state = initialState, action) {
     
     case DELETE_NOTE:{
       console.log('deleting note:', action.noteId);
-      const filteredNotes = state.playerNotes.filter(note => {
+    const filteredNotes = state.playerNotes.filter(note => {
         return note.id !== action.noteId;
       });
       return { 
@@ -203,9 +205,12 @@ function watchlistReducer(state = initialState, action) {
     case SET_LOADING:
       return { ...state, loading: action.loading };
       
-    default:
+    
+      default:
       return state;
   }
 }
 
 export default watchlistReducer;
+// TODO: fix this later  
+// TODONE: fixed

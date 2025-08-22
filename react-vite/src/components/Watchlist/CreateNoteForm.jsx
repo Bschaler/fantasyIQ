@@ -15,6 +15,7 @@ function CreateNoteForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+      console.log("Submitting note...");
 
     if (!playerName || !position || !teamAbbr || !notes || !interestLevel) {
       alert("Please fill out all fields before submitting.");
@@ -33,9 +34,9 @@ function CreateNoteForm() {
 
     await dispatch(createNote(noteData));
 
- 
+  console.log("Note created, rexirected to watchlist");
     
-  
+  // kept forgeting nav 
     navigate('/watchlist'); 
   };
 

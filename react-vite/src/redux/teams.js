@@ -68,6 +68,7 @@ export const loadTeams = () => async (dispatch) => {
 export const createTeam = (teamData) => async (dispatch) => {
   try {
     dispatch(clearError());
+      console.log("creating tema...");  
   const response = await fetch('/api/teams', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -75,6 +76,8 @@ export const createTeam = (teamData) => async (dispatch) => {
     
     body: JSON.stringify(teamData)
   });
+
+    console.log("Response:", response.status);
 
   if (response.ok) {
     const data = await response.json();
@@ -196,3 +199,7 @@ function teamsReducer(state = initialState, action) {
 
 
 export default teamsReducer;
+
+// Redux for team management - this was confusing at first but makes sense now
+// The thunk pattern took me a hot minute to understand, but it takes me time. still need to understand thunk patterns better
+// got the hang of it slowly but surely

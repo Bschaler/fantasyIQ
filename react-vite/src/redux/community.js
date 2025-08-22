@@ -24,7 +24,7 @@ const deletePost = (postId) => ({
   postId
 });
 
-// Thunkin'
+// Thunkin' it
 export const loadPosts = () => async (dispatch) => {
   const response = await fetch('/api/community');
   

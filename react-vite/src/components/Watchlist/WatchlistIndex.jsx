@@ -9,22 +9,32 @@ function WatchlistIndex() {
   const navigate = useNavigate();
   const notes = useSelector((state) => state.watchlist.playerNotes);
   const user = useSelector((state) => state.session.user);
-
+ 
+  
+  
   useEffect(() => {
-    dispatch(loadNotes());
+   console.log("Loading watchlist...");
+    
+   dispatch(loadNotes());
   }, [dispatch]);
 
   const handleDelete = (noteId) => {
     if (window.confirm("Delete this note?")) {
+      console.log("User confirmed delete");
+      
       dispatch(removeNote(noteId));
+    } else {
+      console.log("User cancelled delete");
     }
   };
 
     const handleEdit = (noteId) => { 
+        console.log("Edit button:", noteId);
     navigate(`/watchlist/${noteId}/edit`);
   };
 
   const handleAddNote = () => { 
+   console.log("Add note");
     navigate('/watchlist/new');
   };
 
@@ -79,3 +89,6 @@ function WatchlistIndex() {
 }
 
 export default WatchlistIndex;
+
+// Player notes/watchlist page - shows all the players I'm tracking
+// TODO: maybe add sorting by position or team later

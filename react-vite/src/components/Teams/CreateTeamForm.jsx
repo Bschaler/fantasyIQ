@@ -14,9 +14,11 @@ function CreateTeamForm() {
   const [scoringFormat, setScoringFormat] = useState("");
 
   const handleSubmit = async (e) => {
+      console.log("Form submit started");
     e.preventDefault();
 
     if (!name || !platform || !leagueName || !leagueSize || !scoringFormat) {
+            console.log("failed - missing fields");
       alert("Please fill out all fields before submitting.");
       return;
     }
@@ -31,6 +33,7 @@ function CreateTeamForm() {
     };
 
     await dispatch(createTeam(teamData));
+     // console.log("Team created successfully, redirecting...");
   navigate('/teams');}
 
 return (
@@ -94,3 +97,6 @@ return (
 }
 
 export default CreateTeamForm;
+
+// This component handles creating new fantasy teams
+// Had some trouble with the form validation at first but got it working
