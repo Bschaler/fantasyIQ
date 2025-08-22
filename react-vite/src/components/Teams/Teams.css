@@ -38,18 +38,21 @@
 .add-player-btn,
 .view-roster-btn,
 .edit-btn {
-  background-color: #007bff;
+  background-color: #007bff !important;
   color: white;
-  border: 1px solid #007bff;
+  border: 1px solid #007bff !important;
 }
 
 .delete-btn,
 .back-btn {
-  background-color: #dc3545;
+  background-color: #dc3545 !important;
   color: white;
-  border: 1px solid #dc3545;
+  border: 1px solid #dc3545 !important;
 }
-
+.delete-btn:hover,
+.back-btn:hover {
+  background-color: #c82333 !important;
+}
 /* Empty states */
 .empty-roster,
 .empty-teams {
@@ -138,19 +141,24 @@
 }
 
 .update-btn {
-  background-color: #007bff;
-  color: white;
+  background-color: #007bff !important;
+  color: white !important;
   padding: 12px;
   cursor: pointer;
-  border: none;
+  border: none !important;
   font-size: 16px;
 }
-
+.update-btn:hover {
+  background-color: #0056b3 !important;
+}
 .cancel-btn {
-  background-color: #dc3545;
-  color: white;
+  background-color: #dc3545 !important;
+  color: white !important;
   padding: 12px;
   cursor: pointer;
-  border: none;
+  border: none !important;
   font-size: 16px;
+}
+.cancel-btn:hover {
+  background-color: #c82333 !important;
 }
